@@ -6,6 +6,7 @@
   "types": "module",
   "scripts": {
     "start": "node --no-warnings --watch src/index.js",
+    "collector": "node src/collectors/collector-script.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
