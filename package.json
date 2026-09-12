@@ -1,0 +1,23 @@
+{
+  "name": "lotomind",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "types": "module",
+  "scripts": {
+    "start": "node --no-warnings --watch src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/castelom/LotoMind.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/castelom/LotoMind/issues"
+  },
+  "homepage": "https://github.com/castelom/LotoMind#readme"
+}
