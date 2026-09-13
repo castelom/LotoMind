@@ -1,6 +1,10 @@
 const BASE_URL = 'https://servicebus2.caixa.gov.br/portaldeloterias/api/lotofacil';
 
 export class CaixaApi {
+  constructor({ httpClient = fetch } = {}) { 
+    this.httpClient = httpClient; 
+  }
+
   async getLatest() {
     return this.#get(BASE_URL);
   }
@@ -14,7 +18,7 @@ export class CaixaApi {
   }
 
   async #get(url) {
-    const response = await fetch(url);
+    const response = await this.httpClient(url);
 
     if (!response.ok) {
       throw new Error(
