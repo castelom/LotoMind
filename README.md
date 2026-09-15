@@ -24,7 +24,7 @@ The main objectives are to:
 - Explore feature engineering for sequential lottery data.
 - Compare different neural-network architectures.
 - Investigate whether a hierarchical model can improve number selection.
-- Apply number scores to larger combinations and bolões.
+- Apply number scores to larger combinations and polls.
 - Practice repeated experiments and model comparison.
 - Eventually export a trained model and use it inside a Chrome extension.
 
@@ -318,7 +318,7 @@ lotomind/
 | `transformers` | Convert API payloads into domain objects |
 | `features` | Generate machine-learning features |
 | `datasets` | Split, scale and convert data to tensors |
-| `scoring` | Score numbers and bolões |
+| `scoring` | Score numbers and polls |
 | `evaluation` | Run backtests and ML experiments |
 | `models` | Represent lottery contests |
 | `tests` | Automated tests |
@@ -328,15 +328,124 @@ lotomind/
 
 # Results
 
+The experiments were divided into two stages.
+
+The first stage compares the statistical baselines against MLP V1.
+
+The second stage compares the two neural-network architectures, MLP V1 and MLP V2.
+
+---
+
+## 1. Baselines vs MLP V1
+
+The first experiment compares three strategies:
+
+- Random baseline
+- Frequency baseline
+- MLP V1
+
+The comparison was performed using prediction sizes from 15 to 20 numbers.
+
+For each prediction size, the same historical evaluation methodology was used.
+
+### Average hits
+
+| Numbers | Random Hits | Frequency Hits | MLP V1 Hits | MLP − Frequency |
+|---:|---:|---:|---:|---:|
+| 15 | 9.0003 | 9.0392 | 9.0354 | -0.0038 |
+| 16 | 9.6008 | 9.6379 | 9.6301 | -0.0078 |
+| 17 | 10.2002 | 10.2512 | **10.2584** | **+0.0072** |
+| 18 | 10.8020 | 10.8512 | 10.8425 | -0.0088 |
+| 19 | 11.3990 | 11.4624 | 11.4566 | -0.0058 |
+| 20 | 12.0005 | 12.0577 | **12.0602** | **+0.0025** |
+
+The MLP V1 model produced a slightly higher average number of hits than the Frequency baseline for 17- and 20-number predictions.
+
+For the other prediction sizes, the Frequency baseline achieved slightly higher average hits.
+
+The differences are very small, indicating that MLP V1 did not provide a clear advantage in raw hit count over the simple frequency strategy.
+
+### Average reward
+
+The experiments also used an experimental reward function to give greater weight to higher-hit outcomes.
+
+These reward values are **not official Caixa prize values**. They are experimental weights used only to compare the behavior of the different strategies.
+
+| Numbers | Random Reward | Frequency Reward | MLP V1 Reward | MLP − Frequency Reward |
+|---:|---:|---:|---:|---:|
+| 15 | 0.1279 | 0.1347 | 0.1310 | -0.0038 |
+| 16 | 0.2921 | 0.3076 | **0.3274** | **+0.0199** |
+| 17 | 0.5892 | 0.6233 | **0.6602** | **+0.0368** |
+| 18 | 1.0860 | 1.1353 | **1.2000** | **+0.0647** |
+| 19 | 1.8905 | 2.0143 | **2.0212** | **+0.0069** |
+| 20 | 3.3369 | 3.6183 | **3.8212** | **+0.2029** |
+
+Unlike the raw hit-count comparison, MLP V1 achieved a higher average experimental reward than Frequency for prediction sizes from 16 to 20.
+
+The largest difference occurred for 20-number predictions:
+
+### 20 numbers
+
+```text
+Frequency reward → 3.6183
+MLP V1 reward    → 3.8212
+
+Difference       → +0.2029
+```
+
+This illustrates why evaluating only average hits may not capture the complete behavior of a prediction strategy when higher-hit outcomes are given greater weight.
+
+### Hit difference
+
+```text
+MLP V1 advantage over Frequency
+
+15 numbers                       -0.0038
+16 numbers                       -0.0078
+17 numbers  ████████████         +0.0072
+18 numbers                       -0.0088
+19 numbers                       -0.0058
+20 numbers  ████                 +0.0025
+```
+
+### Interpretation
+
+The baseline experiment provides an important result for the project.
+
+MLP V1 **does not consistently outperform the Frequency baseline in average hits**.
+
+In fact, Frequency performed slightly better for 15, 16, 18 and 19-number predictions.
+
+However, MLP V1 achieved a higher experimental reward for prediction sizes from 16 to 20.
+
+This suggests that the neural network may be producing differences in the distribution of outcomes rather than simply increasing the average number of matches.
+
+The strongest difference was observed for 20-number predictions, where MLP V1 achieved:
+
+```text
++0.0025 average hits
++0.2029 average experimental reward
+```
+
+Nevertheless, these differences are small and should not be interpreted as evidence of a real predictive advantage.
+
+The baseline experiment is primarily useful because it establishes a reference point for evaluating the more complex models.
+
+A neural network should justify its additional complexity through measurable improvement over simple statistical strategies. In the current experiment, MLP V1 shows **interesting behavior in the reward metric**, but not a strong or consistent improvement in raw hit count.
+
+---
+
+## 2. MLP V1 vs MLP V2
+
 The MLP V1 × V2 experiment was executed **100 times** using the same validation dataset.
 
-## Average performance
+### Average performance
 
 The table below shows the average difference between V2 and V1:
 
 > **Δ = V2 average hits − V1 average hits**
 
-| Numbers | V1 mean hits | V2 mean hits | Mean Δ | V2 wins | V1 wins | Ties | V2 win rate |
+| Numbers | V1 Mean Hits | V2 Mean Hits | Mean Δ | V2 Wins | V1 Wins | Ties | V2 Win Rate |
 |---:|---:|---:|---:|---:|---:|---:|---:|
 | 15 | 9.0131 | 9.0364 | **+0.0232** | 71 | 29 | 0 | **71%** |
 | 16 | 9.6153 | 9.6355 | **+0.0201** | 66 | 33 | 1 | **66%** |
@@ -345,7 +454,7 @@ The table below shows the average difference between V2 and V1:
 | 19 | 11.4246 | 11.4309 | **+0.0063** | 50 | 48 | 2 | **50%** |
 | 20 | 12.0270 | 12.0255 | **-0.0015** | 45 | 54 | 1 | **45%** |
 
-## Mean hit difference
+### Mean hit difference
 
 ```text
 V2 average advantage over V1
@@ -360,7 +469,7 @@ V2 average advantage over V1
 
 ### V1 vs V2 mean hits
 
-| Prediction size | V1 | V2 |
+| Prediction Size | V1 | V2 |
 |---:|---:|---:|
 | 15 | 9.0131 | 9.0364 |
 | 16 | 9.6153 | 9.6355 |
@@ -369,9 +478,9 @@ V2 average advantage over V1
 | 19 | 11.4246 | 11.4309 |
 | 20 | 12.0270 | 12.0255 |
 
-## Standard deviation across runs
+### Standard deviation across runs
 
-| Prediction size | V1 std | V2 std |
+| Prediction Size | V1 Std | V2 Std |
 |---:|---:|---:|
 | 15 | 0.0436 | 0.0395 |
 | 16 | 0.0472 | 0.0395 |
@@ -382,7 +491,7 @@ V2 average advantage over V1
 
 V2 showed slightly lower variation across repeated runs for prediction sizes from 15 to 19, while the difference at 20 numbers was negligible.
 
-## Inferences
+### Inferences
 
 The experiments suggest that the group-aware V2 architecture produced a **small average improvement for prediction sizes from 15 to 19 numbers**.
 
@@ -420,8 +529,6 @@ The most reasonable conclusion is:
 > **MLP V2 is a promising experimental direction, but the current results are not strong enough to claim that it is superior to MLP V1 in a statistically or practically meaningful way.**
 
 This distinction is particularly important because the underlying problem is a lottery, where historical correlations can occur naturally even when future draws remain unpredictable.
-
----
 
 # Next Steps
 
@@ -475,7 +582,7 @@ The extension is intended to provide a simple interface for:
 - Running the model locally.
 - Displaying number scores.
 - Applying model scores to combinations.
-- Ranking available bolões.
+- Ranking available polls.
 - Showing the signals used by the scoring process.
 
 The planned architecture is:
@@ -493,7 +600,7 @@ Feature Engineering
 LotoMind Scoring
        │
        ▼
-Bolão Ranking
+Poll Ranking
 ```
 
 The project direction is therefore evolving from:
@@ -506,7 +613,7 @@ toward:
 
 ```text
 "Use statistical and ML signals to rank existing
-Lotofácil combinations and bolões."
+Lotofácil combinations and polls."
 ```
 
 This makes the project more interesting from a software-engineering perspective while keeping the experimental limitations explicit.
