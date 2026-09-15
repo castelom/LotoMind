@@ -1,0 +1,1686 @@
+{
+  "configuration": {
+    "iterations": 100,
+    "predictionSize": 15,
+    "minimumHistory": 20,
+    "totalContests": 3779,
+    "evaluatedContests": 3778
+  },
+  "benchmarkMetrics": {
+    "totalContests": 3778,
+    "averageHits": 9.001357861302274,
+    "medianHits": 9,
+    "maxHits": 14,
+    "count11Plus": 399.29,
+    "count12Plus": 67.88,
+    "count13Plus": 5.91,
+    "count14Plus": 0.23,
+    "count15": 0,
+    "totalReward": 481.52,
+    "averageReward": 0.12745367919534145
+  },
+  "statistics": {
+    "averageHits": {
+      "mean": 9.001357861302274,
+      "standardDeviation": 0.021072861867321047,
+      "min": 8.96003176283748,
+      "max": 9.06379036527263
+    },
+    "medianHits": {
+      "mean": 9,
+      "standardDeviation": 0,
+      "min": 9,
+      "max": 9
+    },
+    "maxHits": {
+      "mean": 13.21,
+      "standardDeviation": 0.4073082370883259,
+      "min": 13,
+      "max": 14
+    },
+    "count11Plus": {
+      "mean": 399.29,
+      "standardDeviation": 19.385713811980203,
+      "min": 349,
+      "max": 442
+    },
+    "count12Plus": {
+      "mean": 67.88,
+      "standardDeviation": 7.9940978227689925,
+      "min": 48,
+      "max": 86
+    },
+    "count13Plus": {
+      "mean": 5.91,
+      "standardDeviation": 2.2320170250246756,
+      "min": 1,
+      "max": 12
+    },
+    "count14Plus": {
+      "mean": 0.23,
+      "standardDeviation": 0.46593991028886994,
+      "min": 0,
+      "max": 2
+    },
+    "count15": {
+      "mean": 0,
+      "standardDeviation": 0,
+      "min": 0,
+      "max": 0
+    },
+    "totalReward": {
+      "mean": 481.52,
+      "standardDeviation": 26.516213907720683,
+      "min": 427,
+      "max": 550
+    },
+    "averageReward": {
+      "mean": 0.12745367919534145,
+      "standardDeviation": 0.007018584941164818,
+      "min": 0.11302276336686078,
+      "max": 0.1455796717840127
+    }
+  },
+  "runs": [
+    {
+      "iteration": 1,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.016940179989412,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 399,
+        "count12Plus": 78,
+        "count13Plus": 5,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 487,
+        "averageReward": 0.12890418210693488
+      }
+    },
+    {
+      "iteration": 2,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.971148755955532,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 405,
+        "count12Plus": 81,
+        "count13Plus": 11,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 508,
+        "averageReward": 0.13446267866596082
+      }
+    },
+    {
+      "iteration": 3,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.965060878771837,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 364,
+        "count12Plus": 55,
+        "count13Plus": 4,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 427,
+        "averageReward": 0.11302276336686078
+      }
+    },
+    {
+      "iteration": 4,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.965060878771837,
+        "medianHits": 9,
+        "maxHits": 14,
+        "count11Plus": 355,
+        "count12Plus": 64,
+        "count13Plus": 9,
+        "count14Plus": 1,
+        "count15": 0,
+        "totalReward": 448,
+        "averageReward": 0.11858125992588671
+      }
+    },
+    {
+      "iteration": 5,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.047644256220222,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 408,
+        "count12Plus": 52,
+        "count13Plus": 4,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 468,
+        "averageReward": 0.12387506617257808
+      }
+    },
+    {
+      "iteration": 6,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.971942826892535,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 400,
+        "count12Plus": 58,
+        "count13Plus": 7,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 472,
+        "averageReward": 0.12493382742191636
+      }
+    },
+    {
+      "iteration": 7,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.022233986236104,
+        "medianHits": 9,
+        "maxHits": 14,
+        "count11Plus": 417,
+        "count12Plus": 86,
+        "count13Plus": 8,
+        "count14Plus": 1,
+        "count15": 0,
+        "totalReward": 530,
+        "averageReward": 0.14028586553732134
+      }
+    },
+    {
+      "iteration": 8,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.020116463737427,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 383,
+        "count12Plus": 69,
+        "count13Plus": 9,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 470,
+        "averageReward": 0.12440444679724721
+      }
+    },
+    {
+      "iteration": 9,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.06379036527263,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 426,
+        "count12Plus": 70,
+        "count13Plus": 6,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 508,
+        "averageReward": 0.13446267866596082
+      }
+    },
+    {
+      "iteration": 10,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.000264690312335,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 430,
+        "count12Plus": 82,
+        "count13Plus": 5,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 522,
+        "averageReward": 0.13816834303864478
+      }
+    },
+    {
+      "iteration": 11,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.99708840656432,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 392,
+        "count12Plus": 75,
+        "count13Plus": 3,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 473,
+        "averageReward": 0.12519851773425092
+      }
+    },
+    {
+      "iteration": 12,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.015352038115404,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 405,
+        "count12Plus": 69,
+        "count13Plus": 2,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 478,
+        "averageReward": 0.12652196929592377
+      }
+    },
+    {
+      "iteration": 13,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.97220751720487,
+        "medianHits": 9,
+        "maxHits": 14,
+        "count11Plus": 366,
+        "count12Plus": 61,
+        "count13Plus": 5,
+        "count14Plus": 1,
+        "count15": 0,
+        "totalReward": 448,
+        "averageReward": 0.11858125992588671
+      }
+    },
+    {
+      "iteration": 14,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.020645844362097,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 392,
+        "count12Plus": 63,
+        "count13Plus": 7,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 469,
+        "averageReward": 0.12413975648491266
+      }
+    },
+    {
+      "iteration": 15,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.026733721545792,
+        "medianHits": 9,
+        "maxHits": 14,
+        "count11Plus": 425,
+        "count12Plus": 73,
+        "count13Plus": 10,
+        "count14Plus": 1,
+        "count15": 0,
+        "totalReward": 529,
+        "averageReward": 0.14002117522498678
+      }
+    },
+    {
+      "iteration": 16,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.007411328745368,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 420,
+        "count12Plus": 77,
+        "count13Plus": 5,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 507,
+        "averageReward": 0.13419798835362626
+      }
+    },
+    {
+      "iteration": 17,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.990471148755956,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 371,
+        "count12Plus": 59,
+        "count13Plus": 7,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 444,
+        "averageReward": 0.11752249867654843
+      }
+    },
+    {
+      "iteration": 18,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.995500264690312,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 402,
+        "count12Plus": 72,
+        "count13Plus": 6,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 486,
+        "averageReward": 0.12863949179460032
+      }
+    },
+    {
+      "iteration": 19,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.993912122816305,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 388,
+        "count12Plus": 72,
+        "count13Plus": 6,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 472,
+        "averageReward": 0.12493382742191636
+      }
+    },
+    {
+      "iteration": 20,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.980148226574908,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 377,
+        "count12Plus": 69,
+        "count13Plus": 7,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 460,
+        "averageReward": 0.12175754367390154
+      }
+    },
+    {
+      "iteration": 21,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.014822657490736,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 411,
+        "count12Plus": 79,
+        "count13Plus": 1,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 492,
+        "averageReward": 0.13022763366860773
+      }
+    },
+    {
+      "iteration": 22,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.020910534674432,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 392,
+        "count12Plus": 68,
+        "count13Plus": 7,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 474,
+        "averageReward": 0.1254632080465855
+      }
+    },
+    {
+      "iteration": 23,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.010852302805718,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 389,
+        "count12Plus": 75,
+        "count13Plus": 6,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 476,
+        "averageReward": 0.12599258867125462
+      }
+    },
+    {
+      "iteration": 24,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.019851773425092,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 421,
+        "count12Plus": 68,
+        "count13Plus": 12,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 513,
+        "averageReward": 0.13578613022763367
+      }
+    },
+    {
+      "iteration": 25,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.001852832186342,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 390,
+        "count12Plus": 63,
+        "count13Plus": 4,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 461,
+        "averageReward": 0.1220222339862361
+      }
+    },
+    {
+      "iteration": 26,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.010587612493383,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 418,
+        "count12Plus": 67,
+        "count13Plus": 2,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 489,
+        "averageReward": 0.12943356273160403
+      }
+    },
+    {
+      "iteration": 27,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.015616728427739,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 418,
+        "count12Plus": 73,
+        "count13Plus": 2,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 495,
+        "averageReward": 0.13102170460561144
+      }
+    },
+    {
+      "iteration": 28,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.016675489677079,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 401,
+        "count12Plus": 68,
+        "count13Plus": 6,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 481,
+        "averageReward": 0.12731604023292747
+      }
+    },
+    {
+      "iteration": 29,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.016940179989412,
+        "medianHits": 9,
+        "maxHits": 14,
+        "count11Plus": 410,
+        "count12Plus": 73,
+        "count13Plus": 8,
+        "count14Plus": 1,
+        "count15": 0,
+        "totalReward": 510,
+        "averageReward": 0.13499205929062996
+      }
+    },
+    {
+      "iteration": 30,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.047644256220222,
+        "medianHits": 9,
+        "maxHits": 14,
+        "count11Plus": 433,
+        "count12Plus": 77,
+        "count13Plus": 8,
+        "count14Plus": 2,
+        "count15": 0,
+        "totalReward": 548,
+        "averageReward": 0.14505029115934356
+      }
+    },
+    {
+      "iteration": 31,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.99073583906829,
+        "medianHits": 9,
+        "maxHits": 14,
+        "count11Plus": 387,
+        "count12Plus": 58,
+        "count13Plus": 6,
+        "count14Plus": 1,
+        "count15": 0,
+        "totalReward": 468,
+        "averageReward": 0.12387506617257808
+      }
+    },
+    {
+      "iteration": 32,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.99470619375331,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 387,
+        "count12Plus": 68,
+        "count13Plus": 5,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 465,
+        "averageReward": 0.12308099523557438
+      }
+    },
+    {
+      "iteration": 33,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.975913181577555,
+        "medianHits": 9,
+        "maxHits": 14,
+        "count11Plus": 349,
+        "count12Plus": 57,
+        "count13Plus": 8,
+        "count14Plus": 1,
+        "count15": 0,
+        "totalReward": 433,
+        "averageReward": 0.11461090524086819
+      }
+    },
+    {
+      "iteration": 34,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.998941238750662,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 417,
+        "count12Plus": 68,
+        "count13Plus": 7,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 499,
+        "averageReward": 0.1320804658549497
+      }
+    },
+    {
+      "iteration": 35,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.979618845950238,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 416,
+        "count12Plus": 84,
+        "count13Plus": 8,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 516,
+        "averageReward": 0.13658020116463737
+      }
+    },
+    {
+      "iteration": 36,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.007411328745368,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 385,
+        "count12Plus": 74,
+        "count13Plus": 6,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 471,
+        "averageReward": 0.12466913710958179
+      }
+    },
+    {
+      "iteration": 37,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.008205399682371,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 396,
+        "count12Plus": 48,
+        "count13Plus": 3,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 450,
+        "averageReward": 0.11911064055055585
+      }
+    },
+    {
+      "iteration": 38,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.989412387506617,
+        "medianHits": 9,
+        "maxHits": 14,
+        "count11Plus": 384,
+        "count12Plus": 58,
+        "count13Plus": 7,
+        "count14Plus": 1,
+        "count15": 0,
+        "totalReward": 467,
+        "averageReward": 0.12361037586024351
+      }
+    },
+    {
+      "iteration": 39,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.019322392800424,
+        "medianHits": 9,
+        "maxHits": 14,
+        "count11Plus": 412,
+        "count12Plus": 65,
+        "count13Plus": 9,
+        "count14Plus": 1,
+        "count15": 0,
+        "totalReward": 506,
+        "averageReward": 0.1339332980412917
+      }
+    },
+    {
+      "iteration": 40,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.983059820010588,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 385,
+        "count12Plus": 71,
+        "count13Plus": 6,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 468,
+        "averageReward": 0.12387506617257808
+      }
+    },
+    {
+      "iteration": 41,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.995500264690312,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 408,
+        "count12Plus": 69,
+        "count13Plus": 7,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 491,
+        "averageReward": 0.12996294335627315
+      }
+    },
+    {
+      "iteration": 42,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.013499205929064,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 409,
+        "count12Plus": 57,
+        "count13Plus": 5,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 476,
+        "averageReward": 0.12599258867125462
+      }
+    },
+    {
+      "iteration": 43,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.987559555320276,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 392,
+        "count12Plus": 64,
+        "count13Plus": 7,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 470,
+        "averageReward": 0.12440444679724721
+      }
+    },
+    {
+      "iteration": 44,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.965060878771837,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 378,
+        "count12Plus": 67,
+        "count13Plus": 9,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 463,
+        "averageReward": 0.12255161461090525
+      }
+    },
+    {
+      "iteration": 45,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.010587612493383,
+        "medianHits": 9,
+        "maxHits": 14,
+        "count11Plus": 431,
+        "count12Plus": 79,
+        "count13Plus": 9,
+        "count14Plus": 2,
+        "count15": 0,
+        "totalReward": 550,
+        "averageReward": 0.1455796717840127
+      }
+    },
+    {
+      "iteration": 46,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.9785600847009,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 410,
+        "count12Plus": 64,
+        "count13Plus": 8,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 490,
+        "averageReward": 0.1296982530439386
+      }
+    },
+    {
+      "iteration": 47,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.961884595023822,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 393,
+        "count12Plus": 65,
+        "count13Plus": 6,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 470,
+        "averageReward": 0.12440444679724721
+      }
+    },
+    {
+      "iteration": 48,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.031498147167813,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 400,
+        "count12Plus": 70,
+        "count13Plus": 10,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 490,
+        "averageReward": 0.1296982530439386
+      }
+    },
+    {
+      "iteration": 49,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.998411858125992,
+        "medianHits": 9,
+        "maxHits": 14,
+        "count11Plus": 388,
+        "count12Plus": 62,
+        "count13Plus": 4,
+        "count14Plus": 1,
+        "count15": 0,
+        "totalReward": 469,
+        "averageReward": 0.12413975648491266
+      }
+    },
+    {
+      "iteration": 50,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.010587612493383,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 416,
+        "count12Plus": 78,
+        "count13Plus": 4,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 502,
+        "averageReward": 0.1328745367919534
+      }
+    },
+    {
+      "iteration": 51,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.020381154049762,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 417,
+        "count12Plus": 77,
+        "count13Plus": 5,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 504,
+        "averageReward": 0.13340391741662255
+      }
+    },
+    {
+      "iteration": 52,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.024616199047115,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 435,
+        "count12Plus": 75,
+        "count13Plus": 8,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 526,
+        "averageReward": 0.13922710428798307
+      }
+    },
+    {
+      "iteration": 53,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.011646373742721,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 408,
+        "count12Plus": 68,
+        "count13Plus": 6,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 488,
+        "averageReward": 0.12916887241926944
+      }
+    },
+    {
+      "iteration": 54,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.00344097406035,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 423,
+        "count12Plus": 73,
+        "count13Plus": 5,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 506,
+        "averageReward": 0.1339332980412917
+      }
+    },
+    {
+      "iteration": 55,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.97750132345156,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 377,
+        "count12Plus": 56,
+        "count13Plus": 6,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 445,
+        "averageReward": 0.117787188988883
+      }
+    },
+    {
+      "iteration": 56,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.009528851244044,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 407,
+        "count12Plus": 75,
+        "count13Plus": 8,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 498,
+        "averageReward": 0.13181577554261514
+      }
+    },
+    {
+      "iteration": 57,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.009528851244044,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 414,
+        "count12Plus": 70,
+        "count13Plus": 8,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 500,
+        "averageReward": 0.1323451561672843
+      }
+    },
+    {
+      "iteration": 58,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.998941238750662,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 378,
+        "count12Plus": 57,
+        "count13Plus": 4,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 443,
+        "averageReward": 0.11725780836421387
+      }
+    },
+    {
+      "iteration": 59,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.997882477501323,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 380,
+        "count12Plus": 62,
+        "count13Plus": 6,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 454,
+        "averageReward": 0.12016940179989412
+      }
+    },
+    {
+      "iteration": 60,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.967972472207517,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 402,
+        "count12Plus": 68,
+        "count13Plus": 8,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 486,
+        "averageReward": 0.12863949179460032
+      }
+    },
+    {
+      "iteration": 61,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.992853361566967,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 372,
+        "count12Plus": 53,
+        "count13Plus": 5,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 435,
+        "averageReward": 0.11514028586553732
+      }
+    },
+    {
+      "iteration": 62,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.00238221281101,
+        "medianHits": 9,
+        "maxHits": 14,
+        "count11Plus": 410,
+        "count12Plus": 73,
+        "count13Plus": 6,
+        "count14Plus": 1,
+        "count15": 0,
+        "totalReward": 506,
+        "averageReward": 0.1339332980412917
+      }
+    },
+    {
+      "iteration": 63,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.966649020645844,
+        "medianHits": 9,
+        "maxHits": 14,
+        "count11Plus": 362,
+        "count12Plus": 60,
+        "count13Plus": 7,
+        "count14Plus": 1,
+        "count15": 0,
+        "totalReward": 447,
+        "averageReward": 0.11831656961355215
+      }
+    },
+    {
+      "iteration": 64,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.983853890947591,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 383,
+        "count12Plus": 63,
+        "count13Plus": 4,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 454,
+        "averageReward": 0.12016940179989412
+      }
+    },
+    {
+      "iteration": 65,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.973530968766543,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 381,
+        "count12Plus": 58,
+        "count13Plus": 4,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 447,
+        "averageReward": 0.11831656961355215
+      }
+    },
+    {
+      "iteration": 66,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.99708840656432,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 391,
+        "count12Plus": 49,
+        "count13Plus": 2,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 444,
+        "averageReward": 0.11752249867654843
+      }
+    },
+    {
+      "iteration": 67,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.977236633139228,
+        "medianHits": 9,
+        "maxHits": 14,
+        "count11Plus": 396,
+        "count12Plus": 55,
+        "count13Plus": 5,
+        "count14Plus": 1,
+        "count15": 0,
+        "totalReward": 472,
+        "averageReward": 0.12493382742191636
+      }
+    },
+    {
+      "iteration": 68,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.02196929592377,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 417,
+        "count12Plus": 70,
+        "count13Plus": 5,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 497,
+        "averageReward": 0.13155108523028058
+      }
+    },
+    {
+      "iteration": 69,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.012705134992059,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 403,
+        "count12Plus": 74,
+        "count13Plus": 5,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 487,
+        "averageReward": 0.12890418210693488
+      }
+    },
+    {
+      "iteration": 70,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.049497088406564,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 428,
+        "count12Plus": 77,
+        "count13Plus": 3,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 511,
+        "averageReward": 0.13525674960296452
+      }
+    },
+    {
+      "iteration": 71,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.00926416093171,
+        "medianHits": 9,
+        "maxHits": 14,
+        "count11Plus": 424,
+        "count12Plus": 71,
+        "count13Plus": 6,
+        "count14Plus": 1,
+        "count15": 0,
+        "totalReward": 518,
+        "averageReward": 0.13710958178930652
+      }
+    },
+    {
+      "iteration": 72,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.011646373742721,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 383,
+        "count12Plus": 73,
+        "count13Plus": 3,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 462,
+        "averageReward": 0.12228692429857067
+      }
+    },
+    {
+      "iteration": 73,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.961884595023822,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 377,
+        "count12Plus": 67,
+        "count13Plus": 6,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 456,
+        "averageReward": 0.12069878242456326
+      }
+    },
+    {
+      "iteration": 74,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.017204870301747,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 395,
+        "count12Plus": 63,
+        "count13Plus": 5,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 468,
+        "averageReward": 0.12387506617257808
+      }
+    },
+    {
+      "iteration": 75,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.994441503440974,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 401,
+        "count12Plus": 68,
+        "count13Plus": 2,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 473,
+        "averageReward": 0.12519851773425092
+      }
+    },
+    {
+      "iteration": 76,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.018793012175754,
+        "medianHits": 9,
+        "maxHits": 14,
+        "count11Plus": 442,
+        "count12Plus": 73,
+        "count13Plus": 4,
+        "count14Plus": 1,
+        "count15": 0,
+        "totalReward": 534,
+        "averageReward": 0.1413446267866596
+      }
+    },
+    {
+      "iteration": 77,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.03308628904182,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 420,
+        "count12Plus": 69,
+        "count13Plus": 6,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 501,
+        "averageReward": 0.13260984647961885
+      }
+    },
+    {
+      "iteration": 78,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.983059820010588,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 364,
+        "count12Plus": 59,
+        "count13Plus": 7,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 437,
+        "averageReward": 0.11566966649020646
+      }
+    },
+    {
+      "iteration": 79,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.024086818422445,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 401,
+        "count12Plus": 62,
+        "count13Plus": 10,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 483,
+        "averageReward": 0.12784542085759662
+      }
+    },
+    {
+      "iteration": 80,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.991794600317629,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 397,
+        "count12Plus": 74,
+        "count13Plus": 7,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 485,
+        "averageReward": 0.12837480148226574
+      }
+    },
+    {
+      "iteration": 81,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.96003176283748,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 365,
+        "count12Plus": 73,
+        "count13Plus": 5,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 448,
+        "averageReward": 0.11858125992588671
+      }
+    },
+    {
+      "iteration": 82,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.980412916887241,
+        "medianHits": 9,
+        "maxHits": 14,
+        "count11Plus": 373,
+        "count12Plus": 65,
+        "count13Plus": 5,
+        "count14Plus": 1,
+        "count15": 0,
+        "totalReward": 459,
+        "averageReward": 0.12149285336156697
+      }
+    },
+    {
+      "iteration": 83,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.007411328745368,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 395,
+        "count12Plus": 50,
+        "count13Plus": 5,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 455,
+        "averageReward": 0.12043409211222869
+      }
+    },
+    {
+      "iteration": 84,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.982530439385918,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 402,
+        "count12Plus": 64,
+        "count13Plus": 5,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 476,
+        "averageReward": 0.12599258867125462
+      }
+    },
+    {
+      "iteration": 85,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.030968766543145,
+        "medianHits": 9,
+        "maxHits": 14,
+        "count11Plus": 435,
+        "count12Plus": 81,
+        "count13Plus": 3,
+        "count14Plus": 1,
+        "count15": 0,
+        "totalReward": 533,
+        "averageReward": 0.14107993647432504
+      }
+    },
+    {
+      "iteration": 86,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.00291159343568,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 411,
+        "count12Plus": 76,
+        "count13Plus": 7,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 501,
+        "averageReward": 0.13260984647961885
+      }
+    },
+    {
+      "iteration": 87,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.981736368448916,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 388,
+        "count12Plus": 73,
+        "count13Plus": 8,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 477,
+        "averageReward": 0.1262572789835892
+      }
+    },
+    {
+      "iteration": 88,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.991529910005294,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 415,
+        "count12Plus": 72,
+        "count13Plus": 5,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 497,
+        "averageReward": 0.13155108523028058
+      }
+    },
+    {
+      "iteration": 89,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.985177342509264,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 379,
+        "count12Plus": 62,
+        "count13Plus": 4,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 449,
+        "averageReward": 0.11884595023822128
+      }
+    },
+    {
+      "iteration": 90,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.023028057173107,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 402,
+        "count12Plus": 69,
+        "count13Plus": 11,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 493,
+        "averageReward": 0.1304923239809423
+      }
+    },
+    {
+      "iteration": 91,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.017998941238751,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 417,
+        "count12Plus": 75,
+        "count13Plus": 5,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 502,
+        "averageReward": 0.1328745367919534
+      }
+    },
+    {
+      "iteration": 92,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.00635256749603,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 404,
+        "count12Plus": 60,
+        "count13Plus": 2,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 468,
+        "averageReward": 0.12387506617257808
+      }
+    },
+    {
+      "iteration": 93,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.980148226574908,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 366,
+        "count12Plus": 62,
+        "count13Plus": 5,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 438,
+        "averageReward": 0.11593435680254102
+      }
+    },
+    {
+      "iteration": 94,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.992853361566967,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 407,
+        "count12Plus": 76,
+        "count13Plus": 3,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 489,
+        "averageReward": 0.12943356273160403
+      }
+    },
+    {
+      "iteration": 95,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.007146638433033,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 421,
+        "count12Plus": 73,
+        "count13Plus": 7,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 508,
+        "averageReward": 0.13446267866596082
+      }
+    },
+    {
+      "iteration": 96,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 8.980148226574908,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 398,
+        "count12Plus": 70,
+        "count13Plus": 7,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 482,
+        "averageReward": 0.12758073054526203
+      }
+    },
+    {
+      "iteration": 97,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.01217575436739,
+        "medianHits": 9,
+        "maxHits": 14,
+        "count11Plus": 405,
+        "count12Plus": 60,
+        "count13Plus": 9,
+        "count14Plus": 1,
+        "count15": 0,
+        "totalReward": 494,
+        "averageReward": 0.13075701429327688
+      }
+    },
+    {
+      "iteration": 98,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.011381683430386,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 401,
+        "count12Plus": 67,
+        "count13Plus": 2,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 472,
+        "averageReward": 0.12493382742191636
+      }
+    },
+    {
+      "iteration": 99,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.00926416093171,
+        "medianHits": 9,
+        "maxHits": 14,
+        "count11Plus": 406,
+        "count12Plus": 78,
+        "count13Plus": 5,
+        "count14Plus": 1,
+        "count15": 0,
+        "totalReward": 505,
+        "averageReward": 0.1336686077289571
+      }
+    },
+    {
+      "iteration": 100,
+      "metrics": {
+        "totalContests": 3778,
+        "averageHits": 9.008205399682371,
+        "medianHits": 9,
+        "maxHits": 13,
+        "count11Plus": 400,
+        "count12Plus": 68,
+        "count13Plus": 6,
+        "count14Plus": 0,
+        "count15": 0,
+        "totalReward": 480,
+        "averageReward": 0.12705134992059292
+      }
+    }
+  ]
+}

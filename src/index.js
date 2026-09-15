@@ -1,85 +1,166 @@
+import { mkdir, writeFile } from 'node:fs/promises';
+
 import { RawContestRepository } from './repositories/raw-contest-repository.js';
 import { CaixaTransformer } from './transformers/caixa-transformer.js';
-import { FeatureEngineer } from './features/feature-engineer.js';
-import { DatasetSplitter } from './datasets/dataset-splitter.js';
-import { FeatureScaler } from './features/feature-scaler.js';
 
-const repository = new RawContestRepository();
-const transformer = new CaixaTransformer();
+import { BaselineExperiment } from './evaluation/baseline-experiment.js';
+import { MLPBaseline } from './evaluation/mlp-baseline.js';
+import { BaselineComparison } from './evaluation/baseline-comparison.js';
 
-const featureEngineer = new FeatureEngineer({
-  windowSize: 20,
-  recentWindowSize: 5
-});
+const repository =
+  new RawContestRepository();
 
-const splitter = new DatasetSplitter();
+const transformer =
+  new CaixaTransformer();
 
-const rawContests = await repository.getAll();
+const rawContests =
+  await repository.getAll();
 
-const contests = rawContests.map(
-  raw => transformer.transform(raw)
-);
-
-const dataset = featureEngineer.generate(contests);
-
-const { train, validation, test } =
-  splitter.split(dataset);
-
-console.log(`Contests: ${contests.length}`);
-console.log(`Dataset: ${dataset.length}`);
-
-console.log('\nDataset split:');
-console.log(`Train: ${train.length}`);
-console.log(`Validation: ${validation.length}`);
-console.log(`Test: ${test.length}`);
-
-console.log('\nTrain range:');
-console.log(
-  `${train[0].contestNumber} → ` +
-  `${train[train.length - 1].contestNumber}`
-);
-
-console.log('\nValidation range:');
-console.log(
-  `${validation[0].contestNumber} → ` +
-  `${validation[validation.length - 1].contestNumber}`
-);
-
-console.log('\nTest range:');
-console.log(
-  `${test[0].contestNumber} → ` +
-  `${test[test.length - 1].contestNumber}`
-);
-
-const scaler = new FeatureScaler();
-
-// IMPORTANTE:
-// fit somente no TRAIN
-scaler.fit(train);
-
-const normalizedTrain =
-  scaler.transform(train);
-
-const normalizedValidation =
-  scaler.transform(validation);
-
-const normalizedTest =
-  scaler.transform(test);
-
-console.log('\nNormalized datasets:');
+const contests =
+  rawContests.map(
+    contest => transformer.transform(contest)
+  );
 
 console.log(
-  'Train:',
-  normalizedTrain[0].features
+  `Concursos carregados: ${contests.length}`
+);
+
+// ============================
+// RANDOM + FREQUENCY
+// ============================
+
+const baselineExperiment =
+  new BaselineExperiment({
+    predictionSizes: [
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    randomIterations: 100,
+    minimumHistory: 20
+  });
+
+console.log('\n=== RANDOM + FREQUENCY ===');
+
+const baselineResult =
+  baselineExperiment.run(contests);
+
+// ============================
+// MLP
+// ============================
+
+const mlpBaseline =
+  new MLPBaseline({
+    predictionSizes: [
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    windowSize: 20,
+    recentWindowSize: 5,
+    epochs: 50,
+    batchSize: 32
+  });
+
+const mlpResult =
+  await mlpBaseline.run(contests);
+
+// ============================
+// COMPARISON
+// ============================
+
+const comparison =
+  new BaselineComparison();
+
+const comparisons =
+  comparison.compare({
+    baseline: baselineResult,
+    mlp: mlpResult
+  });
+
+const result = {
+  configuration: {
+    totalContests: contests.length,
+
+    predictionSizes: [
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+
+    randomIterations: 100,
+
+    mlp: mlpResult.configuration
+  },
+
+  training: mlpResult.training,
+
+  comparisons
+};
+
+await mkdir(
+  'results',
+  { recursive: true }
+);
+
+await writeFile(
+  'results/baseline-comparison.json',
+  JSON.stringify(
+    result,
+    null,
+    2
+  ),
+  'utf-8'
 );
 
 console.log(
-  'Validation:',
-  normalizedValidation[0].features
+  '\n=== BASELINE COMPARISON ==='
+);
+
+console.table(
+  comparisons.map(item => ({
+    Dezenas:
+      item.predictionSize,
+
+    'Random Hits':
+      item.random.averageHits.toFixed(4),
+
+    'Frequency Hits':
+      item.frequency.averageHits.toFixed(4),
+
+    'MLP Hits':
+      item.mlp.averageHits.toFixed(4),
+
+    'MLP - Frequency Hits':
+      item.mlpVsFrequency.toFixed(4),
+
+    'Random Reward':
+      item.random.averageReward.toFixed(4),
+
+    'Frequency Reward':
+      item.frequency.averageReward.toFixed(4),
+
+    'MLP Reward':
+      item.mlp.averageReward.toFixed(4),
+
+    'MLP - Frequency Reward':
+      (
+        item.mlp.averageReward -
+        item.frequency.averageReward
+      ).toFixed(4)
+  }))
 );
 
 console.log(
-  'Test:',
-  normalizedTest[0].features
+  '\nResultado salvo em:',
+  'results/baseline-comparison.json'
 );
-

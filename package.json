@@ -23,5 +23,8 @@
   "homepage": "https://github.com/castelom/LotoMind#readme",
   "devDependencies": {
     "vitest": "^5.0.0"
+  },
+  "dependencies": {
+    "@tensorflow/tfjs-node": "^4.22.0"
   }
 }

@@ -1,0 +1,176 @@
+{
+  "configuration": {
+    "totalContests": 3779,
+    "predictionSizes": [
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "randomIterations": 100,
+    "mlp": {
+      "predictionSizes": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "windowSize": 20,
+      "recentWindowSize": 5,
+      "epochs": 50,
+      "batchSize": 32,
+      "trainSize": 2631,
+      "validationSize": 563,
+      "testSize": 565
+    }
+  },
+  "training": {
+    "epochsCompleted": 9,
+    "finalLoss": 0.6694262623786926,
+    "finalValidationLoss": 0.6747055649757385
+  },
+  "comparisons": [
+    {
+      "predictionSize": 15,
+      "random": {
+        "averageHits": 9.000272631021703,
+        "averageReward": 0.1278533615669666
+      },
+      "frequency": {
+        "averageHits": 9.039174166225516,
+        "averageReward": 0.1347273689782954
+      },
+      "mlp": {
+        "averageHits": 9.035398230088495,
+        "averageReward": 0.13097345132743363,
+        "totalReward": 74,
+        "maxHits": 13,
+        "count11Plus": 63,
+        "count12Plus": 9,
+        "count13Plus": 1,
+        "count14Plus": 0,
+        "count15": 0
+      },
+      "mlpVsFrequency": -0.0037759361370213185
+    },
+    {
+      "predictionSize": 16,
+      "random": {
+        "averageHits": 9.600770248808892,
+        "averageReward": 0.2920725251455797
+      },
+      "frequency": {
+        "averageHits": 9.63790365272631,
+        "averageReward": 0.3075701429327687
+      },
+      "mlp": {
+        "averageHits": 9.63008849557522,
+        "averageReward": 0.3274336283185841,
+        "totalReward": 185,
+        "maxHits": 14,
+        "count11Plus": 126,
+        "count12Plus": 38,
+        "count13Plus": 5,
+        "count14Plus": 1,
+        "count15": 0
+      },
+      "mlpVsFrequency": -0.00781515715108938
+    },
+    {
+      "predictionSize": 17,
+      "random": {
+        "averageHits": 10.200219692959235,
+        "averageReward": 0.5892032821598729
+      },
+      "frequency": {
+        "averageHits": 10.251191106405505,
+        "averageReward": 0.6233456855479089
+      },
+      "mlp": {
+        "averageHits": 10.258407079646018,
+        "averageReward": 0.6601769911504425,
+        "totalReward": 373,
+        "maxHits": 14,
+        "count11Plus": 235,
+        "count12Plus": 86,
+        "count13Plus": 15,
+        "count14Plus": 2,
+        "count15": 0
+      },
+      "mlpVsFrequency": 0.0072159732405125965
+    },
+    {
+      "predictionSize": 18,
+      "random": {
+        "averageHits": 10.802032821598726,
+        "averageReward": 1.0860058231868717
+      },
+      "frequency": {
+        "averageHits": 10.851244044467972,
+        "averageReward": 1.1352567496029646
+      },
+      "mlp": {
+        "averageHits": 10.842477876106194,
+        "averageReward": 1.2,
+        "totalReward": 678,
+        "maxHits": 14,
+        "count11Plus": 340,
+        "count12Plus": 158,
+        "count13Plus": 46,
+        "count14Plus": 8,
+        "count15": 0
+      },
+      "mlpVsFrequency": -0.00876616836177746
+    },
+    {
+      "predictionSize": 19,
+      "random": {
+        "averageHits": 11.39903123345686,
+        "averageReward": 1.890532027527793
+      },
+      "frequency": {
+        "averageHits": 11.462413975648492,
+        "averageReward": 2.014293276866067
+      },
+      "mlp": {
+        "averageHits": 11.456637168141594,
+        "averageReward": 2.0212389380530973,
+        "totalReward": 1142,
+        "maxHits": 14,
+        "count11Plus": 460,
+        "count12Plus": 267,
+        "count13Plus": 92,
+        "count14Plus": 21,
+        "count15": 0
+      },
+      "mlpVsFrequency": -0.005776807506897796
+    },
+    {
+      "predictionSize": 20,
+      "random": {
+        "averageHits": 12.000489677077816,
+        "averageReward": 3.336850185283217
+      },
+      "frequency": {
+        "averageHits": 12.057702488088935,
+        "averageReward": 3.618316569613552
+      },
+      "mlp": {
+        "averageHits": 12.060176991150442,
+        "averageReward": 3.8212389380530976,
+        "totalReward": 2159,
+        "maxHits": 15,
+        "count11Plus": 536,
+        "count12Plus": 399,
+        "count13Plus": 185,
+        "count14Plus": 39,
+        "count15": 5
+      },
+      "mlpVsFrequency": 0.002474503061506539
+    }
+  ]
+}

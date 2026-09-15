@@ -1,0 +1,21 @@
+{
+  "configuration": {
+    "predictionSize": 15,
+    "minimumHistory": 20,
+    "totalContests": 3779,
+    "evaluatedContests": 3778
+  },
+  "metrics": {
+    "totalContests": 3778,
+    "averageHits": 9.039174166225516,
+    "medianHits": 9,
+    "maxHits": 14,
+    "count11Plus": 425,
+    "count12Plus": 65,
+    "count13Plus": 4,
+    "count14Plus": 1,
+    "count15": 0,
+    "totalReward": 509,
+    "averageReward": 0.1347273689782954
+  }
+}
