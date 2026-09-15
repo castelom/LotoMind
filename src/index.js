@@ -1,166 +1,92 @@
-import { mkdir, writeFile } from 'node:fs/promises';
-
 import { RawContestRepository } from './repositories/raw-contest-repository.js';
 import { CaixaTransformer } from './transformers/caixa-transformer.js';
 
-import { BaselineExperiment } from './evaluation/baseline-experiment.js';
-import { MLPBaseline } from './evaluation/mlp-baseline.js';
-import { BaselineComparison } from './evaluation/baseline-comparison.js';
+import { MLPExperiment } from './evaluation/mlp-experiment.js';
 
-const repository =
-  new RawContestRepository();
+async function main() {
+  console.log('=== LOTOMIND ===');
 
-const transformer =
-  new CaixaTransformer();
+  // ==========================================
+  // 1. CARREGAR CONCURSOS
+  // ==========================================
 
-const rawContests =
-  await repository.getAll();
+  const repository =
+    new RawContestRepository();
 
-const contests =
-  rawContests.map(
-    contest => transformer.transform(contest)
+  const rawContests =
+    await repository.getAll();
+
+  console.log(
+    `Concursos carregados: ${rawContests.length}`
   );
 
-console.log(
-  `Concursos carregados: ${contests.length}`
-);
+  // ==========================================
+  // 2. TRANSFORMAR DADOS DA CAIXA
+  // ==========================================
 
-// ============================
-// RANDOM + FREQUENCY
-// ============================
+  const transformer =
+    new CaixaTransformer();
 
-const baselineExperiment =
-  new BaselineExperiment({
-    predictionSizes: [
-      15,
-      16,
-      17,
-      18,
-      19,
-      20
-    ],
-    randomIterations: 100,
-    minimumHistory: 20
+  const contests =
+    rawContests.map(
+      contest =>
+        transformer.transform(contest)
+    );
+
+  console.log(
+    `Concursos transformados: ${contests.length}`
+  );
+
+  // ==========================================
+  // 3. EXPERIMENTO MLP V1 × V2
+  // ==========================================
+
+  console.log('\n');
+  console.log('########################################');
+  console.log('#       EXPERIMENTO MLP V1 × V2       #');
+  console.log('########################################');
+
+  const experiment =
+    new MLPExperiment({
+      iterations: 100,
+
+      predictionSizes: [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    });
+
+  const result =
+    await experiment.run(contests);
+
+  // ==========================================
+  // 4. RESULTADO
+  // ==========================================
+
+  console.log('\n');
+  console.log('########################################');
+  console.log('#          RESULTADO FINAL             #');
+  console.log('########################################');
+
+  experiment.print(result);
+}
+
+main()
+  .then(() => {
+    console.log(
+      '\n=== EXPERIMENTO FINALIZADO ==='
+    );
+  })
+  .catch(error => {
+    console.error(
+      '\n=== ERRO ==='
+    );
+
+    console.error(error);
+
+    process.exit(1);
   });
-
-console.log('\n=== RANDOM + FREQUENCY ===');
-
-const baselineResult =
-  baselineExperiment.run(contests);
-
-// ============================
-// MLP
-// ============================
-
-const mlpBaseline =
-  new MLPBaseline({
-    predictionSizes: [
-      15,
-      16,
-      17,
-      18,
-      19,
-      20
-    ],
-    windowSize: 20,
-    recentWindowSize: 5,
-    epochs: 50,
-    batchSize: 32
-  });
-
-const mlpResult =
-  await mlpBaseline.run(contests);
-
-// ============================
-// COMPARISON
-// ============================
-
-const comparison =
-  new BaselineComparison();
-
-const comparisons =
-  comparison.compare({
-    baseline: baselineResult,
-    mlp: mlpResult
-  });
-
-const result = {
-  configuration: {
-    totalContests: contests.length,
-
-    predictionSizes: [
-      15,
-      16,
-      17,
-      18,
-      19,
-      20
-    ],
-
-    randomIterations: 100,
-
-    mlp: mlpResult.configuration
-  },
-
-  training: mlpResult.training,
-
-  comparisons
-};
-
-await mkdir(
-  'results',
-  { recursive: true }
-);
-
-await writeFile(
-  'results/baseline-comparison.json',
-  JSON.stringify(
-    result,
-    null,
-    2
-  ),
-  'utf-8'
-);
-
-console.log(
-  '\n=== BASELINE COMPARISON ==='
-);
-
-console.table(
-  comparisons.map(item => ({
-    Dezenas:
-      item.predictionSize,
-
-    'Random Hits':
-      item.random.averageHits.toFixed(4),
-
-    'Frequency Hits':
-      item.frequency.averageHits.toFixed(4),
-
-    'MLP Hits':
-      item.mlp.averageHits.toFixed(4),
-
-    'MLP - Frequency Hits':
-      item.mlpVsFrequency.toFixed(4),
-
-    'Random Reward':
-      item.random.averageReward.toFixed(4),
-
-    'Frequency Reward':
-      item.frequency.averageReward.toFixed(4),
-
-    'MLP Reward':
-      item.mlp.averageReward.toFixed(4),
-
-    'MLP - Frequency Reward':
-      (
-        item.mlp.averageReward -
-        item.frequency.averageReward
-      ).toFixed(4)
-  }))
-);
-
-console.log(
-  '\nResultado salvo em:',
-  'results/baseline-comparison.json'
-);

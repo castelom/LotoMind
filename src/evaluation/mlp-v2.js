@@ -1,13 +1,13 @@
 import * as tf from '@tensorflow/tfjs-node';
 
-import { FeatureEngineer } from '../features/feature-engineer.js';
+import { FeatureEngineerV2 } from '../features/feature-engineer-v2.js';
 import { FeatureScaler } from '../features/feature-scaler.js';
 import { DatasetSplitter } from '../datasets/dataset-splitter.js';
-import { TensorDataset } from '../datasets/tensor-dataset.js';
-import { LotteryModel } from '../models/lottery-model.js';
+import { TensorDatasetV2 } from '../datasets/tensor-dataset-v2.js';
+import { LotteryModelV2 } from '../models/lottery-model-v2.js';
 import { RewardCalculator } from './reward-calculator.js';
 
-export class MLPBaseline {
+export class MLPV2 {
   constructor({
     predictionSizes = [15, 16, 17, 18, 19, 20],
     windowSize = 20,
@@ -23,22 +23,16 @@ export class MLPBaseline {
   }
 
   async run(contests) {
-    // ============================
-    // FEATURE ENGINEERING
-    // ============================
+    console.log('\n=== MLP V2 ===');
 
     const featureEngineer =
-      new FeatureEngineer({
+      new FeatureEngineerV2({
         windowSize: this.windowSize,
         recentWindowSize: this.recentWindowSize
       });
 
     const dataset =
       featureEngineer.generate(contests);
-
-    // ============================
-    // DATASET SPLIT
-    // ============================
 
     const splitter =
       new DatasetSplitter();
@@ -54,15 +48,13 @@ export class MLPBaseline {
     console.log(`Validation: ${validation.length}`);
     console.log(`Test: ${test.length}`);
 
-    // ============================
-    // SCALING
-    // ============================
-
+    /*
+     * IMPORTANTE:
+     * scaler é ajustado SOMENTE com train.
+     */
     const scaler =
       new FeatureScaler();
 
-    // IMPORTANTE:
-    // fit somente no train
     const scaledTrain =
       scaler.fitTransform(train);
 
@@ -72,37 +64,26 @@ export class MLPBaseline {
     const scaledTest =
       scaler.transform(test);
 
-    // ============================
-    // TENSORS
-    // ============================
-
     const trainTensor =
-      TensorDataset.from(scaledTrain);
+      TensorDatasetV2.from(scaledTrain);
 
     const validationTensor =
-      TensorDataset.from(scaledValidation);
+      TensorDatasetV2.from(scaledValidation);
 
     const testTensor =
-      TensorDataset.from(scaledTest);
-
-    // ============================
-    // MODEL
-    // ============================
+      TensorDatasetV2.from(scaledTest);
 
     const modelFactory =
-      new LotteryModel();
+      new LotteryModelV2();
 
     const model =
       modelFactory.create();
 
     model.summary();
 
-    // ============================
-    // TRAINING
-    // ============================
-
-    console.log('\n=== TREINAMENTO MLP ===');
-
+    /*
+     * Early stopping baseado na validation loss.
+     */
     const earlyStopping =
       tf.callbacks.earlyStopping({
         monitor: 'val_loss',
@@ -110,13 +91,17 @@ export class MLPBaseline {
         restoreBestWeight: true
       });
 
+    console.log('\n=== TREINAMENTO MLP V2 ===');
+
     const history =
       await model.fit(
         trainTensor.features,
         trainTensor.targets,
         {
           epochs: this.epochs,
-          batchSize: this.batchSize,
+
+          batchSize:
+            this.batchSize,
 
           validationData: [
             validationTensor.features,
@@ -137,65 +122,123 @@ export class MLPBaseline {
       `\nTreinamento terminou em ${history.epoch.length} épocas.`
     );
 
-    // ============================
-    // TEST
-    // ============================
+    /*
+     * =====================================================
+     * AVALIAÇÃO
+     * =====================================================
+     */
 
-    console.log('\n=== AVALIAÇÃO TEST ===');
+    console.log('\n=== AVALIAÇÃO TEST V2 ===');
 
     const predictions =
       model.predict(
         testTensor.features
       );
 
-    const predictionValues =
-      predictions.arraySync();
+    /*
+     * Output 1:
+     * 565 concursos × 25 números
+     */
+    const numberPredictions =
+      predictions[0].arraySync();
 
-    // ============================
-    // REWARD
-    // ============================
+    /*
+     * Output 2:
+     * 565 concursos × 5 grupos
+     */
+    const groupPredictions =
+      predictions[1].arraySync();
 
+    console.log(
+      'Number output shape:',
+      predictions[0].shape
+    );
+
+    console.log(
+      'Group output shape:',
+      predictions[1].shape
+    );
+
+    console.log(
+      '\nExemplo de previsão de grupos:'
+    );
+
+    console.log(
+      groupPredictions[0]
+    );
+
+    /*
+     * Calcula hits e rewards usando
+     * SOMENTE o number output.
+     */
     const rewardCalculator =
       new RewardCalculator();
 
-    // ============================
-    // RESULTS
-    // ============================
-
-    const testResults =
-      this.#calculateTestResults(
+    const benchmarkMetrics =
+      this.#calculateNumberMetrics(
         test,
-        predictionValues,
+        numberPredictions,
         rewardCalculator
       );
 
-    predictions.dispose();
+    console.log(
+      '\n=== MÉTRICAS MLP V2 ==='
+    );
 
-    // ============================
-    // METRICS
-    // ============================
+    console.table(
+      benchmarkMetrics.map(item => ({
+        Dezenas:
+          item.predictionSize,
 
-    const benchmarkMetrics =
-      this.#calculateMetrics(
-        testResults
-      );
+        'Average Hits':
+          item.averageHits.toFixed(4),
 
-    // ============================
-    // CLEANUP
-    // ============================
+        'Median Hits':
+          item.medianHits,
+
+        'Max Hits':
+          item.maxHits,
+
+        '11+':
+          item.count11Plus,
+
+        '12+':
+          item.count12Plus,
+
+        '13+':
+          item.count13Plus,
+
+        '14+':
+          item.count14Plus,
+
+        '15':
+          item.count15,
+
+        'Average Reward':
+          item.averageReward.toFixed(4),
+
+        'Total Reward':
+          item.totalReward.toFixed(2)
+      }))
+    );
+
+    /*
+     * Liberar tensores.
+     */
+    predictions[0].dispose();
+    predictions[1].dispose();
 
     trainTensor.features.dispose();
-    trainTensor.targets.dispose();
+    trainTensor.targets.number_output.dispose();
+    trainTensor.targets.group_output.dispose();
 
     validationTensor.features.dispose();
-    validationTensor.targets.dispose();
+    validationTensor.targets.number_output.dispose();
+    validationTensor.targets.group_output.dispose();
 
     testTensor.features.dispose();
-    testTensor.targets.dispose();
-
-    // ============================
-    // RETURN
-    // ============================
+    testTensor.targets.number_output.dispose();
+    testTensor.targets.group_output.dispose();
 
     return {
       configuration: {
@@ -235,29 +278,27 @@ export class MLPBaseline {
           history.history.val_loss.at(-1)
       },
 
+      /*
+       * Métricas da saída de números.
+       */
       benchmarkMetrics,
 
+      /*
+       * Mantemos os objetos para análises futuras.
+       */
       model,
       scaler,
       featureEngineer,
 
-      // ============================
-      // TEST DATA
-      // ============================
-      // Mantemos o dataset utilizado
-      // no teste para que o MLPComparison
-      // possa garantir que V1 e V2
-      // avaliaram exatamente os mesmos
-      // concursos.
-
       test: {
-        dataset: test,
-        results: testResults
+        numberPredictions,
+        groupPredictions,
+        dataset: test
       }
     };
   }
 
-  #calculateTestResults(
+  #calculateNumberMetrics(
     testDataset,
     predictions,
     rewardCalculator
@@ -274,10 +315,19 @@ export class MLPBaseline {
           const scores =
             predictions[i];
 
-          // ============================
-          // TOP K
-          // ============================
-
+          /*
+           * Transforma:
+           *
+           * [0.4, 0.8, 0.2, ...]
+           *
+           * em:
+           *
+           * [
+           *   { number: 1, score: 0.4 },
+           *   { number: 2, score: 0.8 },
+           *   ...
+           * ]
+           */
           const prediction =
             scores
               .map((score, index) => ({
@@ -296,16 +346,17 @@ export class MLPBaseline {
                 item => item.number
               );
 
-          // ============================
-          // ACTUAL
-          // ============================
-
+          /*
+           * Recupera o resultado real.
+           */
           const actual =
             testDataset[i].target
-              .map((value, index) => ({
-                number: index + 1,
-                value
-              }))
+              .map(
+                (value, index) => ({
+                  number: index + 1,
+                  value
+                })
+              )
               .filter(
                 item => item.value === 1
               )
@@ -313,23 +364,21 @@ export class MLPBaseline {
                 item => item.number
               );
 
-          // ============================
-          // HITS
-          // ============================
-
           const actualSet =
             new Set(actual);
 
+          /*
+           * Calcula quantidade de acertos.
+           */
           const hits =
             prediction.filter(
               number =>
                 actualSet.has(number)
             ).length;
 
-          // ============================
-          // REWARD
-          // ============================
-
+          /*
+           * Calcula reward.
+           */
           const reward =
             rewardCalculator.calculate(
               hits
@@ -351,89 +400,83 @@ export class MLPBaseline {
 
         return {
           predictionSize,
-          results
+
+          ...this.#calculateMetrics(
+            results
+          )
         };
       }
     );
   }
 
-  #calculateMetrics(testResults) {
-    return testResults.map(
-      ({
-        predictionSize,
-        results
-      }) => {
-        const hits =
-          results.map(
-            result => result.hits
-          );
+  #calculateMetrics(results) {
+    const hits =
+      results.map(
+        result => result.hits
+      );
 
-        const rewards =
-          results.map(
-            result => result.reward
-          );
+    const rewards =
+      results.map(
+        result => result.reward
+      );
 
-        const averageHits =
-          hits.reduce(
-            (sum, value) =>
-              sum + value,
-            0
-          ) / hits.length;
+    const totalReward =
+      rewards.reduce(
+        (sum, value) =>
+          sum + value,
+        0
+      );
 
-        const totalReward =
-          rewards.reduce(
-            (sum, value) =>
-              sum + value,
-            0
-          );
+    return {
+      totalContests:
+        results.length,
 
-        return {
-          predictionSize,
+      averageHits:
+        hits.reduce(
+          (sum, value) =>
+            sum + value,
+          0
+        ) / hits.length,
 
-          totalContests:
-            results.length,
+      medianHits:
+        this.#median(hits),
 
-          averageHits,
+      maxHits:
+        Math.max(...hits),
 
-          medianHits:
-            this.#median(hits),
+      count11Plus:
+        hits.filter(
+          h => h >= 11
+        ).length,
 
-          maxHits:
-            Math.max(...hits),
+      count12Plus:
+        hits.filter(
+          h => h >= 12
+        ).length,
 
-          count11Plus:
-            hits.filter(
-              h => h >= 11
-            ).length,
+      count13Plus:
+        hits.filter(
+          h => h >= 13
+        ).length,
 
-          count12Plus:
-            hits.filter(
-              h => h >= 12
-            ).length,
+      count14Plus:
+        hits.filter(
+          h => h >= 14
+        ).length,
 
-          count13Plus:
-            hits.filter(
-              h => h >= 13
-            ).length,
+      count15:
+        hits.filter(
+          h => h === 15
+        ).length,
 
-          count14Plus:
-            hits.filter(
-              h => h >= 14
-            ).length,
+      totalReward,
 
-          count15:
-            hits.filter(
-              h => h === 15
-            ).length,
+      averageReward:
+        totalReward /
+        results.length,
 
-          totalReward,
-
-          averageReward:
-            totalReward /
-            results.length
-        };
-      }
-    );
+      results
+    };
   }
 
   #median(values) {
