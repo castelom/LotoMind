@@ -36,6 +36,26 @@ export class FeatureEngineer {
     return dataset;
   }
 
+  generatePredictionFeatures(contests) {
+    if (
+      !Array.isArray(contests) ||
+      contests.length < this.windowSize
+    ) {
+      throw new Error(
+        `At least ${this.windowSize} contests are required`
+      );
+    }
+
+    const historicalContests =
+      contests.slice(
+        -this.windowSize
+      );
+
+    return this.#generateFeatures(
+      historicalContests
+    );
+  }
+
   #generateFeatures(contests) {
     const recentContests = contests.slice(
       -this.recentWindowSize

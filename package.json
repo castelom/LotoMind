@@ -7,6 +7,7 @@
   "scripts": {
     "start": "node --no-warnings --watch src/index.js",
     "collector": "node src/collectors/collector-script.js",
+    "build:extension": "node scripts/build-extension.js",
     "test": "vitest run",
     "test:watch": "vitest"
   },
@@ -22,9 +23,11 @@
   },
   "homepage": "https://github.com/castelom/LotoMind#readme",
   "devDependencies": {
+    "esbuild": "^0.28.2",
     "vitest": "^5.0.0"
   },
   "dependencies": {
+    "@tensorflow/tfjs": "^4.22.0",
     "@tensorflow/tfjs-node": "^4.22.0"
   }
 }

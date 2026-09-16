@@ -1,3 +1,5 @@
+import * as tf from '@tensorflow/tfjs';
+
 export class ModelLoader {
   constructor({
     modelDirectory = 'models/mlp-v2'

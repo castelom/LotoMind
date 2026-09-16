@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
 
@@ -20,54 +21,86 @@
 
   <main class="container">
 
-    <h1>LotoMind</h1>
+    <header>
+      <h1>LotoMind</h1>
 
-    <p class="subtitle">
-      A machine learning study project for Lotofácil, built as a software engineering and AI/ML portfolio project.
-    </p>
+      <p class="subtitle">
+        Machine Learning for Lotofácil
+      </p>
+    </header>
 
     <section class="model-status">
-
       <span
         id="status-indicator"
         class="status-indicator"
       ></span>
 
       <span id="status-text">
-        Loading model...
+        Carregando modelo...
       </span>
+    </section>
+
+    <section
+      id="prediction-section"
+      class="prediction-section hidden"
+    >
+
+      <h2>
+        Quantas dezenas deseja jogar?
+      </h2>
+
+      <div
+        id="prediction-sizes"
+        class="prediction-sizes"
+      ></div>
+
+      <button
+        id="generate-button"
+        class="generate-button"
+        disabled
+      >
+        Gerar aposta
+      </button>
 
     </section>
 
     <section
-      id="model-info"
-      class="model-info hidden"
+      id="loading-section"
+      class="loading-section hidden"
+    >
+      Gerando aposta...
+    </section>
+
+    <section
+      id="result-section"
+      class="result-section hidden"
     >
 
-      <div>
-        <strong>Model</strong>
-        <span id="model-name">-</span>
-      </div>
+      <h2>
+        Sua aposta
+      </h2>
 
-      <div>
-        <strong>Version</strong>
-        <span id="model-version">-</span>
-      </div>
+      <div
+        id="numbers"
+        class="numbers"
+      ></div>
 
-      <div>
-        <strong>Features</strong>
-        <span id="feature-count">-</span>
-      </div>
+      <p
+        id="contest-info"
+        class="contest-info"
+      ></p>
 
     </section>
 
+    <section
+      id="error-section"
+      class="error-section hidden"
+    ></section>
+
   </main>
 
-  <script src="../lib/tf.min.js"></script>
-  <script
-    type="module"
-    src="popup.js"
-  ></script>
+  <script src="../dist/popup.js"></script>
 
 </body>
+
 </html>
