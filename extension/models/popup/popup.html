@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>LotoMind</title>
+
+  <link
+    rel="stylesheet"
+    href="popup.css"
+  >
+</head>
+
+<body>
+
+  <main class="container">
+
+    <h1>LotoMind</h1>
+
+    <p class="subtitle">
+      A machine learning study project for Lotofácil, built as a software engineering and AI/ML portfolio project.
+    </p>
+
+    <section class="model-status">
+
+      <span
+        id="status-indicator"
+        class="status-indicator"
+      ></span>
+
+      <span id="status-text">
+        Loading model...
+      </span>
+
+    </section>
+
+    <section
+      id="model-info"
+      class="model-info hidden"
+    >
+
+      <div>
+        <strong>Model</strong>
+        <span id="model-name">-</span>
+      </div>
+
+      <div>
+        <strong>Version</strong>
+        <span id="model-version">-</span>
+      </div>
+
+      <div>
+        <strong>Features</strong>
+        <span id="feature-count">-</span>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="../lib/tf.min.js"></script>
+  <script
+    type="module"
+    src="popup.js"
+  ></script>
+
+</body>
+</html>

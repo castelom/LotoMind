@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "LotoMind",
+  "version": "1.0.0",
+  "description": "Análise inteligente de concursos da Lotofácil.",
+
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "LotoMind"
+  },
+
+  "permissions": []
+}
