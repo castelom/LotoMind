@@ -122,6 +122,8 @@ export class MLPV2 {
       `\nTreinamento terminou em ${history.epoch.length} épocas.`
     );
 
+    const featureCount = train[0].features.length;
+
     /*
      * =====================================================
      * AVALIAÇÃO
@@ -289,6 +291,7 @@ export class MLPV2 {
       model,
       scaler,
       featureEngineer,
+      featureCount,
 
       test: {
         numberPredictions,

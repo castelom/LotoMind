@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+
+  "name": "LotoMind",
+
+  "version": "1.0.0",
+
+  "description": "A machine learning study project for Lotofácil.",
+
+  "action": {
+    "default_popup":
+      "popup/popup.html",
+
+    "default_title":
+      "LotoMind"
+  },
+
+  "permissions": [],
+
+  "host_permissions": [
+    "https://servicebus2.caixa.gov.br/*"
+  ]
+}

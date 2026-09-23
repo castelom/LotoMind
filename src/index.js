@@ -1,7 +1,7 @@
 import { RawContestRepository } from './repositories/raw-contest-repository.js';
 import { CaixaTransformer } from './transformers/caixa-transformer.js';
-
-import { MLPExperiment } from './evaluation/mlp-experiment.js';
+import { MLPV2 } from './evaluation/mlp-v2.js';
+import { ModelExporter } from './export/model-exporter.js';
 
 async function main() {
   console.log('=== LOTOMIND ===');
@@ -38,18 +38,16 @@ async function main() {
   );
 
   // ==========================================
-  // 3. EXPERIMENTO MLP V1 × V2
+  // 3. TREINAR MLP V2
   // ==========================================
 
   console.log('\n');
   console.log('########################################');
-  console.log('#       EXPERIMENTO MLP V1 × V2       #');
+  console.log('#          Treinando MLP V2           #');
   console.log('########################################');
 
-  const experiment =
-    new MLPExperiment({
-      iterations: 100,
-
+  const mlp =
+    new MLPV2({
       predictionSizes: [
         15,
         16,
@@ -57,22 +55,52 @@ async function main() {
         18,
         19,
         20
-      ]
+      ],
+
+      windowSize: 20,
+
+      recentWindowSize: 5,
+
+      epochs: 50,
+
+      batchSize: 32
     });
 
   const result =
-    await experiment.run(contests);
+    await mlp.run(contests);
 
   // ==========================================
-  // 4. RESULTADO
+  // 4. EXPORTAR MODELO
   // ==========================================
 
   console.log('\n');
   console.log('########################################');
-  console.log('#          RESULTADO FINAL             #');
+  console.log('#            Model Export              #');
   console.log('########################################');
 
-  experiment.print(result);
+  const exporter =
+    new ModelExporter();
+
+  await exporter.export({
+    model:
+      result.model,
+
+    scaler:
+      result.scaler,
+
+    configuration:
+      result.configuration,
+
+    featureCount:
+      result.featureCount,
+
+    modelVersion:
+      '1.0.0'
+  });
+
+  console.log(
+    '\n=== Model Exported ==='
+  );
 }
 
 main()

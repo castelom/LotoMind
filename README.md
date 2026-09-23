@@ -26,7 +26,7 @@ The main objectives are to:
 - Investigate whether a hierarchical model can improve number selection.
 - Apply number scores to larger combinations and polls.
 - Practice repeated experiments and model comparison.
-- Eventually export a trained model and use it inside a Chrome extension.
+- Export trained models and deploy browser-based inference through a Chrome extension.
 
 ### Disclaimer
 
@@ -295,7 +295,37 @@ lotomind/
 │   │   ├── mlp-comparison.js
 │   │   └── mlp-experiment.js
 │   │
+│   ├── export/
+│   │   └── model-exporter.js
+│   │
 │   └── index.js
+│
+├── extension/
+│   ├── manifest.json
+│   ├── models/
+│   │   └── mlp-v2/
+│   │       ├── metadata.json
+│   │       ├── model.json
+│   │       └── weights.bin
+│   ├── popup/
+│   │   ├── popup.html
+│   │   ├── popup.css
+│   │   └── popup.js
+│   ├── services/
+│   │   ├── contest-service.js
+│   │   ├── model-loader.js
+│   │   └── prediction-service.js
+│   └── dist/
+│       └── popup.js
+│
+├── scripts/
+│   └── build-extension.js
+│
+├── models/
+│   └── mlp-v2/
+│       ├── metadata.json
+│       ├── model.json
+│       └── weights.bin
 │
 ├── data/
 │   ├── raw/
@@ -323,6 +353,8 @@ lotomind/
 | `models` | Represent lottery contests |
 | `tests` | Automated tests |
 | `results` | Store experimental outputs |
+| `export` | Export trained models and inference metadata |
+| `extension` | Run the inference pipeline and user interface in Chrome |
 
 ---
 
@@ -530,93 +562,272 @@ The most reasonable conclusion is:
 
 This distinction is particularly important because the underlying problem is a lottery, where historical correlations can occur naturally even when future draws remain unpredictable.
 
+# Extension
+
+LotoMind includes a Chrome extension that deploys the trained MLP V2 model directly in the browser using TensorFlow.js.
+
+The extension is the serving layer of the project. Training remains in the Node.js pipeline, while the browser loads the exported model and executes inference without retraining it.
+
+The user selects a prediction size from **15 to 20 numbers** and requests a new prediction. The extension retrieves the latest Lotofácil contests from the Caixa API, reproduces the same feature-engineering and scaling steps used during training, runs the exported MLP V2 model, and selects the highest-scoring numbers.
+
+The current browser inference flow is:
+
+```text
+Caixa API
+    ↓
+Latest 20 contests
+    ↓
+Caixa transformation
+    ↓
+Feature engineering
+    ↓
+100 input features
+    ↓
+Exported training scaler
+    ↓
+TensorFlow.js MLP V2
+    ↓
+25 number scores
+    ↓
+Top N scores
+    ↓
+Prediction shown in the extension
+```
+
+For each number from 01 to 25, the same four features used during training are generated: frequency in the historical window, frequency in the recent window, delay since the last occurrence, and presence in the previous draw. With 25 numbers, this produces the same **100-feature input vector** expected by the exported model.
+
+The scaler is **not fitted again in the browser**. The minimum and maximum values learned from the training split are exported with the model metadata and reused during inference. This keeps preprocessing consistent between training and serving and avoids introducing information from future contests into the fitted scaler.
+
+The model itself has two outputs, but the current extension uses the individual-number output to rank the 25 numbers. After inference, the scores are sorted from highest to lowest and the top `N` numbers are selected according to the prediction size chosen by the user. The selected numbers are then sorted numerically for presentation.
+
+### Extension architecture
+
+```text
+Training pipeline
+
+data/raw/*.json
+      ↓
+RawContestRepository
+      ↓
+Feature Engineering + Scaling
+      ↓
+MLP V2 training
+      ↓
+ModelExporter
+      ↓
+model.json + weights.bin + metadata.json
+
+
+Browser inference pipeline
+
+Chrome Extension
+      ↓
+CaixaApi / ContestService
+      ↓
+FeatureEngineer
+      ↓
+Exported scaler metadata
+      ↓
+TensorFlow.js model
+      ↓
+PredictionService
+      ↓
+Popup UI
+```
+
+The extension source is bundled with **esbuild**. TensorFlow.js is imported as an npm dependency and included in the browser bundle, avoiding reliance on global scripts and keeping the extension compatible with Chrome Manifest V3.
+
+### How to use
+
+1. Install the project dependencies if necessary:
+
+   ```bash
+   npm install
+   ```
+
+2. Generate the extension bundle:
+
+   ```bash
+   npm run build:extension
+   ```
+
+3. Open Chrome and navigate to `chrome://extensions`.
+
+4. Enable **Developer mode**.
+
+5. Click **Load unpacked**.
+
+6. Select the project's `extension/` directory.
+
+7. Pin or open **LotoMind** from the Chrome extensions menu.
+
+8. Select how many numbers you want in the prediction: **15, 16, 17, 18, 19, or 20**.
+
+9. Click **Generate prediction**.
+
+The extension will retrieve the latest available Lotofácil history, prepare the model input, run inference locally in the browser, and display the selected numbers together with the latest contest used as historical context.
+
+---
+
 # Next Steps
 
-## 1. Export MLP V2
+The next stage of LotoMind shifts the project from generating a single number selection toward **ranking available Lotofácil pools**.
 
-The next step is to export the trained MLP V2 model so that inference can be performed without retraining the network.
+The objective is not to claim that a model can predict a random lottery draw. Instead, the project will investigate whether available pools can be described, compared, and ranked using transparent structural, statistical, cost, diversity, and model-derived signals.
 
-The intended pipeline is:
+## 1. Pool data collection
+
+Historical pool data is not currently available to the project. However, information about pools that are available for upcoming contests can be collected before each draw.
+
+LotoMind will therefore begin building its own historical pool dataset. For every future contest, the project should store a snapshot of the pools available before the draw, including all useful information exposed by the source, such as price, number of bets, numbers per bet, quota information, and the combinations contained in the pool when available.
 
 ```text
+Upcoming contest
+      ↓
+Collect available pools
+      ↓
+Store pre-draw snapshot
+      ↓
+Draw occurs
+      ↓
+Retrieve official result
+      ↓
+Enrich snapshot with observed outcomes
+      ↓
+Historical pool dataset
+```
+
+The pre-draw snapshot is important because only information available **before the target draw** should be used as model input.
+
+## 2. Pool result enrichment and automatic labeling
+
+After each contest is drawn, LotoMind will retrieve the official result and evaluate the pools that were previously collected.
+
+This creates labels from observed outcomes rather than manually assigned judgments. Depending on the information available, examples may include best hit count, hit distribution across bets, prize-related outcomes, or other measurable post-draw performance variables.
+
+The resulting dataset will connect:
+
+```text
+Pool features available before the draw
+                  +
+Observed result after the draw
+                  ↓
+         Supervised training data
+```
+
+## 3. Pool feature engineering
+
+A dedicated feature-engineering layer will describe each pool independently of its eventual result. Candidate features include:
+
+- Price and cost-related attributes.
+- Number of bets and numbers per bet.
+- Coverage of the 01–25 number space.
+- Repetition and overlap between bets.
+- Diversity between combinations.
+- Odd/even and sum distributions.
+- Number-frequency distributions across the pool.
+- Exposure to numbers with high MLP V2 scores.
+- Aggregate MLP compatibility signals such as mean, minimum, and maximum number scores.
+
+This allows the current number model to remain useful: MLP V2 can become one source of features for the future pool-ranking system rather than being replaced by it.
+
+## 4. Deterministic ranking baseline
+
+Before training a machine-learning ranker, LotoMind should establish a transparent deterministic baseline.
+
+The initial pool score can combine explicitly documented factors such as coverage, diversity, cost efficiency, structural characteristics, and compatibility with the existing number model.
+
+This score should be interpreted only as a **LotoMind comparative score**, not as a proven probability of winning.
+
+A deterministic baseline also provides a meaningful reference against which future learned ranking models can be evaluated.
+
+## 5. Historical pool dataset
+
+As new contests occur, the collection and enrichment pipeline will progressively create a versioned historical dataset:
+
+```text
+Contest N
+  ├── pre-draw pool snapshot
+  ├── pre-draw features
+  └── observed outcomes
+
+Contest N + 1
+  ├── pre-draw pool snapshot
+  ├── pre-draw features
+  └── observed outcomes
+
+...
+```
+
+This dataset becomes a new project asset and enables supervised experiments that are not possible with the currently available data.
+
+## 6. Train a pool-ranking model
+
+Once enough historical observations have been collected, LotoMind will train and compare models specifically for pool ranking. This is a new training problem rather than fine-tuning the existing MLP V2.
+
+The exact learning objective should be chosen only after the available labels and dataset size are understood. Possible formulations include regression, classification, and **learning to rank**.
+
+Learning to rank is particularly relevant because multiple pools are available for the same contest and the application ultimately needs to order those alternatives according to measurable signals. Candidate experiments may include ranking-capable gradient-boosted models and neural ranking approaches.
+
+## 7. Temporal evaluation and retraining
+
+Pool-ranking experiments must preserve the chronological discipline already used by LotoMind. Training data should contain only contests that occurred before the evaluation period.
+
+```text
+Older pool snapshots
+       ↓
 Training
-   ↓
-MLP V2
-   ↓
-Model export
-   ↓
-Model loading
-   ↓
-Inference
+       ↓
+More recent snapshots
+       ↓
+Validation / test
+       ↓
+Future collected contests
+       ↓
+Periodic retraining
 ```
 
-The exported model should be usable by the future client application.
+The learned ranker should be compared against simple baselines and evaluated out of time. Because lottery results are random, special attention must be given to overfitting, spurious historical correlations, data leakage, and the difference between a useful pool-comparison metric and evidence of predictive advantage.
 
-The inference flow will be:
+## Target architecture
+
+The longer-term architecture is expected to evolve toward:
 
 ```text
-Latest Lotofácil history
-        ↓
-Feature engineering
-        ↓
-Feature scaling
-        ↓
-MLP V2
-   ┌────┴────┐
-   ▼         ▼
-Numbers    Groups
-   └────┬────┘
-        ▼
-Group-aware selector
-        ↓
-Number ranking
+                 Caixa results
+                      │
+                      ▼
+              Historical draws
+                      │
+                      ▼
+             Number Predictor
+                      │
+                scores 01–25
+                      │
+                      ▼
+Available pools → Pool Feature Engineer
+                      │
+                      ▼
+                  Pool Ranker
+                      │
+                      ▼
+                 Pool ranking
+                      │
+               draw takes place
+                      │
+                      ▼
+                Result Enricher
+                      │
+                      ▼
+             Historical Dataset
+                      │
+                      ▼
+                 Train Ranker
+                      │
+                      └───────────↺
 ```
 
-## 2. Chrome extension
-
-After model export, the next major step is to build a Chrome extension around the LotoMind inference pipeline.
-
-The extension is intended to provide a simple interface for:
-
-- Loading or updating historical data.
-- Running the model locally.
-- Displaying number scores.
-- Applying model scores to combinations.
-- Ranking available polls.
-- Showing the signals used by the scoring process.
-
-The planned architecture is:
-
-```text
-Chrome Extension
-       │
-       ▼
-TensorFlow.js Model
-       │
-       ▼
-Feature Engineering
-       │
-       ▼
-LotoMind Scoring
-       │
-       ▼
-Poll Ranking
-```
-
-The project direction is therefore evolving from:
-
-```text
-"Predict the next 15 numbers"
-```
-
-toward:
-
-```text
-"Use statistical and ML signals to rank existing
-Lotofácil combinations and polls."
-```
-
-This makes the project more interesting from a software-engineering perspective while keeping the experimental limitations explicit.
+This direction expands LotoMind from a model experiment into a broader ML engineering system involving **data collection, automatic labeling, dataset versioning, feature engineering, model serving, ranking, temporal evaluation, and retraining**.
 
 ---
 
@@ -648,6 +859,16 @@ Model comparison
 Model export
       ↓
 Browser deployment
+      ↓
+Pool data collection
+      ↓
+Automatic labeling
+      ↓
+Pool feature engineering
+      ↓
+Learning-to-rank experiments
+      ↓
+Temporal evaluation and retraining
 ```
 
 The project demonstrates practical experience with:
@@ -663,5 +884,8 @@ The project demonstrates practical experience with:
 - Model comparison
 - Software architecture
 - Browser-based ML inference
+- Model serving
+- Automated dataset construction
+- Learning-to-rank system design
 
 **LotoMind should not be interpreted as a lottery prediction system or a strategy with proven financial value.**

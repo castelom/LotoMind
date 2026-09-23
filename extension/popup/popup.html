@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>LotoMind</title>
+
+  <link
+    rel="stylesheet"
+    href="popup.css"
+  >
+</head>
+
+<body>
+
+  <main class="container">
+
+    <header>
+      <h1>LotoMind</h1>
+
+      <p class="subtitle">
+        Machine Learning for Lotofácil
+      </p>
+    </header>
+
+    <section class="model-status">
+      <span
+        id="status-indicator"
+        class="status-indicator"
+      ></span>
+
+      <span id="status-text">
+        Loading Model...
+      </span>
+    </section>
+
+    <section
+      id="prediction-section"
+      class="prediction-section hidden"
+    >
+
+      <h2>
+        How many numbers do you want to play?
+      </h2>
+
+      <div
+        id="prediction-sizes"
+        class="prediction-sizes"
+      ></div>
+
+      <button
+        id="generate-button"
+        class="generate-button"
+        disabled
+      >
+        Generate Bet
+      </button>
+
+    </section>
+
+    <section
+      id="loading-section"
+      class="loading-section hidden"
+    >
+      Generating bet...
+    </section>
+
+    <section
+      id="result-section"
+      class="result-section hidden"
+    >
+
+      <h2>
+        Your bet
+      </h2>
+
+      <div
+        id="numbers"
+        class="numbers"
+      ></div>
+
+      <p
+        id="contest-info"
+        class="contest-info"
+      ></p>
+
+    </section>
+
+    <section
+      id="error-section"
+      class="error-section hidden"
+    ></section>
+
+  </main>
+
+  <script src="../dist/popup.js"></script>
+
+</body>
+
+</html>
